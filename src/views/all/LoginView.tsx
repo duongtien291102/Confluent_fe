@@ -38,13 +38,13 @@ const LoginView: React.FC<LoginViewProps> = ({
                         )}
 
                         <div className="space-y-2">
-                            <label className="block text-sm font-medium text-gray-700">Email</label>
+                            <label className="block text-sm font-medium text-gray-700">Tài Khoản hoặc Email</label>
                             <input
                                 type="email"
                                 value={credentials.email}
                                 onChange={(e) => onCredentialsChange({ ...credentials, email: e.target.value })}
                                 className="w-full px-4 py-3.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F79E61]/50 focus:border-[#F79E61] transition-all duration-200 hover:border-gray-300 placeholder:text-gray-400"
-                                placeholder="admin@gmail.com"
+                                placeholder="tài khoản hoặc email"
                                 required
                             />
                         </div>
@@ -57,7 +57,7 @@ const LoginView: React.FC<LoginViewProps> = ({
                                     value={credentials.password}
                                     onChange={(e) => onCredentialsChange({ ...credentials, password: e.target.value })}
                                     className="w-full px-4 py-3.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F79E61]/50 focus:border-[#F79E61] transition-all duration-200 hover:border-gray-300 placeholder:text-gray-400 pr-12"
-                                    placeholder="123456"
+                                    placeholder="******"
                                     required
                                 />
                                 <button type="button" onClick={onTogglePassword} className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors">
@@ -92,7 +92,7 @@ const LoginView: React.FC<LoginViewProps> = ({
                     </p>
                 </div>
 
-                <p className="text-center text-xs text-gray-400 mt-6">© 2024 Confluent. All rights reserved.</p>
+                <p className="text-center text-xs text-gray-400 mt-6">© 2024 Confluent by Hoanghuy UDS.</p>
             </div>
         </div>
     );

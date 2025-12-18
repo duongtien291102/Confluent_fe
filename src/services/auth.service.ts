@@ -6,12 +6,43 @@ export const authService = {
     async login(credentials: LoginCredentials): Promise<User> {
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        if (credentials.email === 'admin' && credentials.password === '123456') {
+        const { email, password } = credentials;
+
+        // Check for admin credentials
+        if (email === 'admin' && password === '123') {
             currentUser = {
                 id: '1',
-                email: 'admin@gmail.com',
+                email: 'admin',
                 name: 'Administrator',
                 role: 'Admin',
+            };
+            return currentUser;
+        }
+
+        // Check for Gmail login (any valid Gmail with password 123)
+        if (email && email.includes('@gmail.com') && password === '123') {
+            const username = email.split('@')[0];
+            const displayName = username.charAt(0).toUpperCase() + username.slice(1);
+            
+            currentUser = {
+                id: Date.now().toString(), // Generate unique ID
+                email: email,
+                name: displayName,
+                role: 'User',
+            };
+            return currentUser;
+        }
+
+        // Check for other email domains with password 123
+        if (email && email.includes('@') && password === '123') {
+            const username = email.split('@')[0];
+            const displayName = username.charAt(0).toUpperCase() + username.slice(1);
+            
+            currentUser = {
+                id: Date.now().toString(), // Generate unique ID
+                email: email,
+                name: displayName,
+                role: 'User',
             };
             return currentUser;
         }
