@@ -10,6 +10,7 @@ interface MainLayoutViewProps {
     onTimeline?: () => void;
     isJobPage: boolean;
     isChartPage?: boolean;
+    isHomePage?: boolean;
     showBackButton?: boolean;
     title?: string;
     onTimeFilterChange?: (filter: string) => void;
@@ -26,6 +27,7 @@ const MainLayoutView: React.FC<MainLayoutViewProps> = ({
     onTimeline,
     isJobPage,
     isChartPage = false,
+    isHomePage = false,
     showBackButton = false,
     title,
     onTimeFilterChange,
@@ -43,11 +45,12 @@ const MainLayoutView: React.FC<MainLayoutViewProps> = ({
                     onTimeline={onTimeline}
                     isJobPage={isJobPage}
                     isChartPage={isChartPage}
+                    isHomePage={isHomePage}
                     showBackButton={showBackButton}
                     onTimeFilterChange={onTimeFilterChange}
                     currentTimeFilter={currentTimeFilter}
                 />
-                <main className={`flex-1 overflow-y-auto ${isChartPage ? '' : 'p-6'}`}>{children}</main>
+                <main className={`flex-1 overflow-y-auto ${isChartPage || isHomePage ? '' : 'p-6'}`}>{children}</main>
             </div>
         </div>
     );

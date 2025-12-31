@@ -7,6 +7,7 @@ interface HeaderProps {
     isJobPage?: boolean;
     showBackButton?: boolean;
     isChartPage?: boolean;
+    isHomePage?: boolean;
     onTimeFilterChange?: (filter: string) => void;
     currentTimeFilter?: string;
 }
@@ -19,6 +20,7 @@ const Header: React.FC<HeaderProps> = ({
     isJobPage = false, 
     showBackButton = false,
     isChartPage = false,
+    isHomePage = false,
     onTimeFilterChange,
     currentTimeFilter = 'all'
 }) => {
@@ -49,13 +51,13 @@ const Header: React.FC<HeaderProps> = ({
             </div>
             {!showBackButton && (
                 <div className="flex items-center gap-3">
-                    {isChartPage ? (
+                    {(isChartPage || isHomePage) ? (
                         <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
                             {[
-                                { key: 'week', label: '1 tuần' },
-                                { key: 'month', label: '1 tháng' },
-                                { key: 'year', label: '1 năm' },
-                                { key: 'all', label: 'Tất cả' }
+                                { key: 'day', label: 'Day' },
+                                { key: 'week', label: 'Week' },
+                                { key: 'month', label: 'Month' },
+                                { key: 'year', label: 'Year' }
                             ].map((filter) => (
                                 <button
                                     key={filter.key}
@@ -83,10 +85,12 @@ const Header: React.FC<HeaderProps> = ({
                                     <span>Timeline</span>
                                 </button>
                             )}
-                            <button onClick={handleButtonClick} className="flex items-center gap-2 bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all shadow-sm hover:shadow-md">
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
-                                <span>{buttonText}</span>
-                            </button>
+                            {!isHomePage && (
+                                <button onClick={handleButtonClick} className="flex items-center gap-2 bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all shadow-sm hover:shadow-md">
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                                    <span>{buttonText}</span>
+                                </button>
+                            )}
                         </>
                     )}
                 </div>

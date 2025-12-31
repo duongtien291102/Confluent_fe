@@ -10,21 +10,22 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false, onToggle, onLogo
     const location = useLocation();
     const getActiveItem = () => {
         const path = location.pathname;
-        if (path === '/chart' || path.includes('/chart')) return 'home';
+        if (path === '/home' || path === '/') return 'home';
+        if (path === '/project' || path.includes('/project')) return 'projects';
         if (path === '/dashboard' || path.includes('/dashboard')) return 'projects';
+        if (path === '/chart' || path.includes('/chart')) return 'reports';
         if (path.includes('/job')) return 'tasks';
         if (path.includes('/calendar')) return 'calendar';
-        if (path.includes('/reports')) return 'reports';
         if (path.includes('/settings')) return 'settings';
         return 'home';
     };
     const handleMenuClick = (id: string) => {
         switch (id) {
             case 'home':
-                navigate('/chart');
+                navigate('/home');
                 break;
             case 'projects':
-                navigate('/dashboard');
+                navigate('/project');
                 break;
             case 'tasks':
                 navigate('/job');

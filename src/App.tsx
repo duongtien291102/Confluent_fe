@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { MainLayout, AddProjectModal } from './components';
 import AddJobModal from './components/job/AddJobModal';
-import { DashboardPage, LoginPage, JobListPage, JobDetailPage, TimelinePage, ChartPage } from './pages';
+import { DashboardPage, LoginPage, JobListPage, JobDetailPage, TimelinePage, ChartPage, HomePage } from './pages';
 import { projectService, authService, jobService } from './services';
 import type { User, CreateJobInput, CreateProjectInput } from './models';
 function App() {
@@ -146,14 +146,16 @@ const AppContent: React.FC<{
           currentTimeFilter={currentTimeFilter}
         >
           <Routes>
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/project" element={<DashboardPage key={refreshKey} />} />
             <Route path="/dashboard" element={<DashboardPage key={refreshKey} />} />
             <Route path="/chart" element={<ChartPage />} />
             <Route path="/job" element={<JobListPage />} />
             <Route path="/job/timeline" element={<TimelinePage />} />
             <Route path="/job/:id" element={<JobDetailPage />} />
-            <Route path="/" element={<Navigate to="/chart" replace />} />
-            <Route path="/login" element={<Navigate to="/chart" replace />} />
-            <Route path="*" element={<Navigate to="/chart" replace />} />
+            <Route path="/" element={<Navigate to="/home" replace />} />
+            <Route path="/login" element={<Navigate to="/home" replace />} />
+            <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
         </MainLayout>
         <AddJobModal

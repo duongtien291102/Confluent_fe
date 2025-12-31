@@ -33,6 +33,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({
         if (pathname === '/chart') {
             return 'Báo cáo';
         }
+        if (pathname === '/dashboard') {
+            return 'Danh sách dự án';
+        }
         if (pathname.includes('/job')) {
             return 'Danh sách công việc';
         }
@@ -42,6 +45,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
     const isJobDetailPage = location.pathname.match(/^\/job\/[^/]+$/);
     const isTimelinePage = location.pathname === '/job/timeline';
     const isChartPage = location.pathname === '/chart';
+    const isHomePage = location.pathname === '/home' || location.pathname === '/';
     return (
         <MainLayoutView
             isSidebarCollapsed={isSidebarCollapsed}
@@ -53,6 +57,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
             onTimeline={onTimeline}
             isJobPage={isJobPage}
             isChartPage={isChartPage}
+            isHomePage={isHomePage}
             showBackButton={!!(isJobDetailPage || isTimelinePage)}
             title={getPageTitle(location.pathname)}
             onTimeFilterChange={onTimeFilterChange}
