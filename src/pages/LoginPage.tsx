@@ -17,8 +17,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
         try {
             const user = await authService.login(credentials);
             onLoginSuccess?.(user);
-        } catch {
-            setError('Email hoặc mật khẩu không đúng');
+        } catch (err: any) {
+            setError(err.message || 'Đăng nhập thất bại');
         } finally {
             setIsLoading(false);
         }

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { MainLayout, AddProjectModal } from './components';
 import AddJobModal from './components/job/AddJobModal';
@@ -11,6 +11,22 @@ function App() {
   const [isJobModalOpen, setIsJobModalOpen] = useState(false);
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const isAuth = authService.isAuthenticated();
+      const user = authService.getCurrentUser();
+      
+      setIsAuthenticated(isAuth);
+      setCurrentUser(user);
+      setIsLoading(false);
+    };
+
+    checkAuth();
+  }, []);
+
   const handleLoginSuccess = (user: User) => {
     setCurrentUser(user);
     setIsAuthenticated(true);
@@ -38,6 +54,15 @@ function App() {
       console.error('Failed to add project:', error);
     }
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-lg">Loading...</div>
+      </div>
+    );
+  }
+
   if (!isAuthenticated) {
     return (
       <BrowserRouter>
@@ -126,9 +151,9 @@ const AppContent: React.FC<{
             <Route path="/job" element={<JobListPage />} />
             <Route path="/job/timeline" element={<TimelinePage />} />
             <Route path="/job/:id" element={<JobDetailPage />} />
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/login" element={<Navigate to="/dashboard" replace />} />
-            <Route path="*" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/" element={<Navigate to="/chart" replace />} />
+            <Route path="/login" element={<Navigate to="/chart" replace />} />
+            <Route path="*" element={<Navigate to="/chart" replace />} />
           </Routes>
         </MainLayout>
         <AddJobModal
