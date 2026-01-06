@@ -32,13 +32,13 @@ const ColumnSelector: React.FC<ColumnSelectorProps> = ({ columns, onToggle, visi
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between px-3 py-2 bg-[#46c690] text-white rounded-lg text-sm"
+                className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors bg-gray-100 text-gray-600 hover:bg-gray-200"
             >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 truncate">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
                     </svg>
-                    <span>Tổng Hợp ({visibleCount}/11)</span>
+                    <span className='truncate'>Tổng Hợp ({visibleCount}/11)</span>
                 </div>
                 <svg className="w-4 h-4 ml-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
