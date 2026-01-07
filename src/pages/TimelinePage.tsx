@@ -232,9 +232,11 @@ const TimelinePage: React.FC = () => {
                                                     className="absolute top-1/2 -translate-y-1/2 h-9 rounded-xl flex items-center justify-center text-white text-[11px] font-bold px-4 cursor-pointer hover:brightness-105 active:scale-[0.98] transition-all shadow-lg hover:shadow-xl z-10"
                                                     style={{
                                                         left: `${left + 4}px`,
-                                                        width: `${Math.max(width - 8, 40)}px`,
+                                                        right: `calc(100% - ${left + width - 120}px)`,
+                                                        width: `${Math.max(width - 120, 40)}px`,
                                                         backgroundColor: task.color,
-                                                        border: `2px solid rgba(255,255,255,0.2)`
+                                                        border: `2px solid rgba(255,255,255,0.2)`,
+                                                        maxWidth: `1513px`
                                                     }}
                                                     title={task.fullTaskName}
                                                 >
